@@ -56,7 +56,7 @@ class Virtue_Nav_Walker extends Walker_Nav_Menu {
 	 * @param stdClass $args   An object of wp_nav_menu() arguments.
 	 * @param int      $id     Current item ID.
 	 */
-	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+	public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
 		$slug = sanitize_title( $item->title );
@@ -70,6 +70,11 @@ class Virtue_Nav_Walker extends Walker_Nav_Menu {
 		$classes = array_filter( $classes, array( &$this, 'check_current' ) );
 
 		$classes[] = 'menu-item-' . $item->ID;
+
+		/**
+		 * {@inheritdoc}
+		 */
+		$args = apply_filters( 'nav_menu_item_args', $args, $item, $depth );
 
 		$custom_classes = get_post_meta( $item->ID, '_menu_item_classes', true );
 		if ( $custom_classes ) {
