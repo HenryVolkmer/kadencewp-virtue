@@ -33,18 +33,10 @@
 	} else if ( $slider == "mock_flex" ) {
 			get_template_part('templates/home/mock', 'flex');
 	}
-	$show_pagetitle = false;
-	if( isset( $virtue['homepage_layout']['enabled'] ) ){
-		$i = 0;
-		foreach ( $virtue['homepage_layout']['enabled'] as $key=>$value ) {
-			if( $key == "block_one" ) {
-				$show_pagetitle = true;
-			}
-			$i++;
-			if( $i==2 ) break;
-		}
-	}
-	if( $show_pagetitle == true ) { ?>
+	
+	?>
+
+	<?php if( virtue_display_header() ): ?>
 		<div id="homeheader" class="welcomeclass">
 			<div class="container">
 				<div class="page-header">
@@ -54,7 +46,7 @@
 				</div>
 			</div><!--container-->
 		</div><!--welomeclass-->
-	<?php } ?>
+	<?php endif; ?>
 
 	<div id="content" class="container homepagecontent <?php echo esc_attr( virtue_container_class() ); ?>">
 		<div class="row">
@@ -76,7 +68,7 @@
 
 					    	case 'block_one':
 
-							   	if( $show_pagetitle == false ) { ?>
+							   	if( virtue_display_header() ) { ?>
 									<div id="homeheader" class="welcomeclass">
 										<div class="page-header">
 											<h1 class="entry-title" itemprop="name">

@@ -70,6 +70,21 @@ function kadence_display_sidebar() {
 	error_log( "The kadence_display_sidebar() function is deprecated since version 3.1.1. Please use virtue_display_sidebar() instead." );
 	return virtue_display_sidebar();
 }
+
+
+function virtue_display_header() {
+
+  if (!is_page() || 'page.php' !== basename( get_page_template() ) ) {
+    return false;
+  }
+  
+  global $post;
+
+  $postsidebar = get_post_meta( $post->ID, '_kad_show_page_title', true );
+
+  return ($postsidebar && $postsidebar == 'show');
+}
+
 /**
  * Define which pages shouldn't have the sidebar
  *
